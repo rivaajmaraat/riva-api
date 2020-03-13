@@ -4,10 +4,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
-using Riva.Models.Models;
+using Riva.Models.HAYDEN;
 using Riva.Models.RivaData;
 using Riva.Models.RivaSQL;
 using Riva.Models.WaxModel;
+using Riva.Api.Services;
 
 namespace Riva.Api
 {
@@ -17,7 +18,7 @@ namespace Riva.Api
         public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
             IConfigurationBuilder builder = GetConfigurationBuilder(environment);
-            Configuration = configuration;
+            Configuration = builder.Build();
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -27,10 +28,11 @@ namespace Riva.Api
             services.AddDbContext<RivaDataContext>(options => options.UseSqlServer(Configuration.GetConnectionString("RivaData")));
             services.AddDbContext<RivaSQLContext>(options => options.UseSqlServer(Configuration.GetConnectionString("RivaSQL")));
             services.AddDbContext<WaxModelContext>(options => options.UseSqlServer(Configuration.GetConnectionString("WaxModel")));
+            services.AddTransient<AuthService>();
             services.AddControllers();
             services.AddCors();
         }
-
+        // This method sets up and return the appsettings and user secrets configurations.
         public IConfigurationBuilder GetConfigurationBuilder(IWebHostEnvironment env)
         {
             return new ConfigurationBuilder()
