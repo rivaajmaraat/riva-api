@@ -25,9 +25,7 @@ namespace Riva.Models.RivaSQL
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseSqlServer("Server=localhost\\SQLEXPRESS;Database=RivaSQL;User Id=sa;Password=pass123456;Trusted_Connection=True;");
-            }
+                optionsBuilder.EnableSensitiveDataLogging(false);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -29,6 +29,8 @@ namespace Riva.Api.Services
                 var existLogin = await _haydenContext.Logins.FirstOrDefaultAsync(l => l.UserName == data.UserName);
                 if (existLogin != null)
                     return Response.Error("Login already exists.");
+                data.DateCreated = DateTime.UtcNow;
+                data.LastLogin = data.DateCreated;
                 await _haydenContext.Logins.AddAsync(data);
                 await _haydenContext.SaveChangesAsync();
                 await transaction.CommitAsync();

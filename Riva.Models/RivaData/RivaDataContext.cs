@@ -22,10 +22,7 @@ namespace Riva.Models.RivaData
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
-            {
-                // Move this to secrets.json
-                optionsBuilder.UseSqlServer("Server=localhost\\SQLEXPRESS;Database=RivaData;User Id=sa;Password=pass123456;Trusted_Connection=True;");
-            }
+                optionsBuilder.EnableSensitiveDataLogging(false);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

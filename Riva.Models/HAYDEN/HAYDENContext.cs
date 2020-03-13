@@ -40,10 +40,7 @@ namespace Riva.Models.HAYDEN
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
-            {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=localhost\\SQLEXPRESS;Database=HAYDEN;User Id=sa;Password=pass123456;Trusted_Connection=True;");
-            }
+                optionsBuilder.EnableSensitiveDataLogging(false);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
