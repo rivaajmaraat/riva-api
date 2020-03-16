@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http.Features;
 
 namespace Riva.Api.Services
 {
@@ -17,22 +18,32 @@ namespace Riva.Api.Services
             _haydenContext = haydenContext;
         }
 
-        //public async Task<Response<AuthResponse>> Login(Login data)
-        //{
-        //    try
-        //    {
-        //        var login = await _haydenContext.Logins.FirstOrDefaultAsync(l => l.UserName == data.UserName);
-        //        if (login != null)
-        //        {
+        public async Task<Response<AuthResponse>> Login(Login data)
+        {
+            try
+            {
+                var login = await _haydenContext.Login.FirstOrDefaultAsync(l => l.UserName == data.UserName && l.Password == data.Password);
+                if (login != null)
+                {
+                    login.LastLogin = DateTime.UtcNow;
+                    await _haydenContext.Login.AddAsync(login);
+                    await _haydenContext.SaveChangesAsync();
+                    var response = new AuthResponse() 
+                    {
+                        UserName = login.UserName,
+                        Token = "",
+                        Last_Login = login.LastLogin
+                    };
+                    return Response<AuthResponse>.Success(response);
+                }
+                return Response<AuthResponse>.Error("User not found!");
 
-        //        }
-        //        return
-        //    }
-        //    catch (Exception ex) 
-        //    {
-
-        //    }
-        //}
+            }
+            catch (Exception ex)
+            {
+                return Response<AuthResponse>.Error(ex.Message);
+            }
+        }
 
         /// <summary>
         /// Creates new login data.
