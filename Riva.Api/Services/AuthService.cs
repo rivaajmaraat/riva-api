@@ -16,22 +16,40 @@ namespace Riva.Api.Services
         {
             _haydenContext = haydenContext;
         }
+
+        //public async Task<Response<AuthResponse>> Login(Login data)
+        //{
+        //    try
+        //    {
+        //        var login = await _haydenContext.Logins.FirstOrDefaultAsync(l => l.UserName == data.UserName);
+        //        if (login != null)
+        //        {
+
+        //        }
+        //        return
+        //    }
+        //    catch (Exception ex) 
+        //    {
+
+        //    }
+        //}
+
         /// <summary>
         /// Creates new login data.
         /// </summary>
         /// <param name="data">Login data</param>
         /// <returns><see cref="ResponseMessage"/></returns>
-        public async Task<Response> CreateUser(Logins data)
+        public async Task<Response> CreateUser(Login data)
         {
             using var transaction = _haydenContext.Database.BeginTransaction();
             try
             {
-                var existLogin = await _haydenContext.Logins.FirstOrDefaultAsync(l => l.UserName == data.UserName);
+                var existLogin = await _haydenContext.Login.FirstOrDefaultAsync(l => l.UserName == data.UserName);
                 if (existLogin != null)
                     return Response.Error("Login already exists.");
                 data.DateCreated = DateTime.UtcNow;
                 data.LastLogin = data.DateCreated;
-                await _haydenContext.Logins.AddAsync(data);
+                await _haydenContext.Login.AddAsync(data);
                 await _haydenContext.SaveChangesAsync();
                 await transaction.CommitAsync();
                 return Response.Success();

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Riva.Models.HAYDEN
 {
-    public partial class MapSpidApplicationUser
+    public partial class ZmapSpidApplicationUser
     {
         public long Spid { get; set; }
         public string LogId { get; set; }

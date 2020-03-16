@@ -20,7 +20,7 @@ namespace Riva.Api.Controllers
 
         [HttpPost]
         [Route("register")]
-        public async Task<IActionResult> Register([FromBody] Logins login)
+        public async Task<IActionResult> Register([FromBody] Login login)
         {
             var response = await _service.CreateUser(login);
 

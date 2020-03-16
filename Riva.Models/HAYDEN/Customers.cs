@@ -5,12 +5,6 @@ namespace Riva.Models.HAYDEN
 {
     public partial class Customers
     {
-        public Customers()
-        {
-            OrdersTestTry = new HashSet<OrdersTestTry>();
-            OrdersTry = new HashSet<OrdersTry>();
-        }
-
         public int CustIdno { get; set; }
         public string CustomerId { get; set; }
         public string CompanyName { get; set; }
@@ -25,8 +19,5 @@ namespace Riva.Models.HAYDEN
         public string Phone { get; set; }
         public string Fax { get; set; }
         public string ShippingMethod { get; set; }
-
-        public virtual ICollection<OrdersTestTry> OrdersTestTry { get; set; }
-        public virtual ICollection<OrdersTry> OrdersTry { get; set; }
     }
 }

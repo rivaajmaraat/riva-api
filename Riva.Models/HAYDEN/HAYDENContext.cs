@@ -15,27 +15,33 @@ namespace Riva.Models.HAYDEN
         {
         }
 
-        public virtual DbSet<ComponentInventoryTry> ComponentInventoryTry { get; set; }
-        public virtual DbSet<ComponentTypes> ComponentTypes { get; set; }
         public virtual DbSet<Customers> Customers { get; set; }
+        public virtual DbSet<GemInventory> GemInventory { get; set; }
+        public virtual DbSet<GemStatus> GemStatus { get; set; }
+        public virtual DbSet<HistoryLogs> HistoryLogs { get; set; }
         public virtual DbSet<InventoryLog> InventoryLog { get; set; }
-        public virtual DbSet<JsonFiles> JsonFiles { get; set; }
-        public virtual DbSet<JsonFilesTests> JsonFilesTests { get; set; }
-        public virtual DbSet<Logins> Logins { get; set; }
-        public virtual DbSet<MapSpidApplicationUser> MapSpidApplicationUser { get; set; }
+        public virtual DbSet<JewelryType> JewelryType { get; set; }
+        public virtual DbSet<Login> Login { get; set; }
         public virtual DbSet<MaterialCodes> MaterialCodes { get; set; }
-        public virtual DbSet<MetalKarats> MetalKarats { get; set; }
-        public virtual DbSet<MetalTypes> MetalTypes { get; set; }
-        public virtual DbSet<OrderDetailsTry> OrderDetailsTry { get; set; }
-        public virtual DbSet<OrderDetailsTrytest> OrderDetailsTrytest { get; set; }
-        public virtual DbSet<OrderStates> OrderStates { get; set; }
-        public virtual DbSet<OrdersTestTry> OrdersTestTry { get; set; }
-        public virtual DbSet<OrdersTry> OrdersTry { get; set; }
-        public virtual DbSet<ProductBomTry> ProductBomTry { get; set; }
-        public virtual DbSet<ProductTypes> ProductTypes { get; set; }
-        public virtual DbSet<ProductsTry> ProductsTry { get; set; }
-        public virtual DbSet<Status> Status { get; set; }
-        public virtual DbSet<Types> Types { get; set; }
+        public virtual DbSet<MetalMarket> MetalMarket { get; set; }
+        public virtual DbSet<Orders> Orders { get; set; }
+        public virtual DbSet<OrdersDetails> OrdersDetails { get; set; }
+        public virtual DbSet<OrdersDetailsRgw> OrdersDetailsRgw { get; set; }
+        public virtual DbSet<OrdersStatus> OrdersStatus { get; set; }
+        public virtual DbSet<Products> Products { get; set; }
+        public virtual DbSet<ProductsBom> ProductsBom { get; set; }
+        public virtual DbSet<ProductsPrices> ProductsPrices { get; set; }
+        public virtual DbSet<ProductsStatus> ProductsStatus { get; set; }
+        public virtual DbSet<ProductsStock> ProductsStock { get; set; }
+        public virtual DbSet<ProductsWtg> ProductsWtg { get; set; }
+        public virtual DbSet<UnitsOfMeasure> UnitsOfMeasure { get; set; }
+        public virtual DbSet<VwJsonFiles> VwJsonFiles { get; set; }
+        public virtual DbSet<ZAspNetRoles> ZAspNetRoles { get; set; }
+        public virtual DbSet<ZAspNetUserClaims> ZAspNetUserClaims { get; set; }
+        public virtual DbSet<ZAspNetUserLogins> ZAspNetUserLogins { get; set; }
+        public virtual DbSet<ZAspNetUserRoles> ZAspNetUserRoles { get; set; }
+        public virtual DbSet<ZAspNetUsers> ZAspNetUsers { get; set; }
+        public virtual DbSet<ZmapSpidApplicationUser> ZmapSpidApplicationUser { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -45,106 +51,10 @@ namespace Riva.Models.HAYDEN
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ComponentInventoryTry>(entity =>
-            {
-                entity.HasKey(e => e.ComponentId);
-
-                entity.ToTable("ComponentInventory_TRY");
-
-                entity.HasIndex(e => e.ComponentTypeId)
-                    .HasName("IX_FK_Component_Type_1");
-
-                entity.Property(e => e.ComponentId).HasColumnName("ComponentID");
-
-                entity.Property(e => e.ComponentName)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.ComponentTypeId).HasColumnName("ComponentTypeID");
-
-                entity.Property(e => e.DiaQty10).HasColumnName("Dia_QTY_1_0");
-
-                entity.Property(e => e.DiaQty13).HasColumnName("Dia_QTY_1_3");
-
-                entity.Property(e => e.DiaQty15).HasColumnName("Dia_QTY_1_5");
-
-                entity.Property(e => e.DiaQty18).HasColumnName("Dia_QTY_1_8");
-
-                entity.Property(e => e.Location)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.MaxStock14rg).HasColumnName("MaxStock_14RG");
-
-                entity.Property(e => e.MaxStock14wg).HasColumnName("MaxStock_14WG");
-
-                entity.Property(e => e.MaxStock14yg).HasColumnName("MaxStock_14YG");
-
-                entity.Property(e => e.MaxStock18rg).HasColumnName("MaxStock_18RG");
-
-                entity.Property(e => e.MaxStock18wg).HasColumnName("MaxStock_18WG");
-
-                entity.Property(e => e.MaxStock18yg).HasColumnName("MaxStock_18YG");
-
-                entity.Property(e => e.MaxStockSs).HasColumnName("MaxStock_SS");
-
-                entity.Property(e => e.MinStock14rg).HasColumnName("MinStock_14RG");
-
-                entity.Property(e => e.MinStock14wg).HasColumnName("MinStock_14WG");
-
-                entity.Property(e => e.MinStock14yg).HasColumnName("MinStock_14YG");
-
-                entity.Property(e => e.MinStock18rg).HasColumnName("MinStock_18RG");
-
-                entity.Property(e => e.MinStock18wg).HasColumnName("MinStock_18WG");
-
-                entity.Property(e => e.MinStock18yg).HasColumnName("MinStock_18YG");
-
-                entity.Property(e => e.MinStockSs).HasColumnName("MinStock_SS");
-
-                entity.Property(e => e.Series)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Stock14rg).HasColumnName("Stock_14RG");
-
-                entity.Property(e => e.Stock14wg).HasColumnName("Stock_14WG");
-
-                entity.Property(e => e.Stock14yg).HasColumnName("Stock_14YG");
-
-                entity.Property(e => e.Stock18rg).HasColumnName("Stock_18RG");
-
-                entity.Property(e => e.Stock18wg).HasColumnName("Stock_18WG");
-
-                entity.Property(e => e.Stock18yg).HasColumnName("Stock_18YG");
-
-                entity.Property(e => e.StockSs).HasColumnName("Stock_SS");
-
-                entity.HasOne(d => d.ComponentType)
-                    .WithMany(p => p.ComponentInventoryTry)
-                    .HasForeignKey(d => d.ComponentTypeId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Component_Type_1");
-            });
-
-            modelBuilder.Entity<ComponentTypes>(entity =>
-            {
-                entity.HasKey(e => e.ComponentTypeId);
-
-                entity.Property(e => e.ComponentTypeId).HasColumnName("ComponentTypeID");
-
-                entity.Property(e => e.Description)
-                    .IsRequired()
-                    .HasMaxLength(200)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.StatusId).HasColumnName("StatusID");
-            });
-
             modelBuilder.Entity<Customers>(entity =>
             {
-                entity.HasKey(e => e.CustomerId);
+                entity.HasKey(e => e.CustomerId)
+                    .HasName("PK_Customers_1");
 
                 entity.Property(e => e.CustomerId)
                     .HasColumnName("CustomerID")
@@ -206,6 +116,117 @@ namespace Riva.Models.HAYDEN
                     .IsUnicode(false);
             });
 
+            modelBuilder.Entity<GemInventory>(entity =>
+            {
+                entity.HasKey(e => e.GemId);
+
+                entity.Property(e => e.GemId).HasColumnName("GemID");
+
+                entity.Property(e => e.CurrentStatus).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.CustomerSku)
+                    .HasColumnName("CustomerSKU")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DateReceived).HasColumnType("datetime");
+
+                entity.Property(e => e.DateUsed).HasColumnType("datetime");
+
+                entity.Property(e => e.GemColor)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.GemName)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.LinkedOrder)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.LinkedOrderItem)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Location)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Owner)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Shape)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.SizeMm)
+                    .HasColumnName("SizeMM")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Sku)
+                    .IsRequired()
+                    .HasColumnName("SKU")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Type)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.WeightCarat)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<GemStatus>(entity =>
+            {
+                entity.Property(e => e.GemStatusId).HasColumnName("GemStatusID");
+
+                entity.Property(e => e.Status)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<HistoryLogs>(entity =>
+            {
+                entity.HasKey(e => e.LogIdx)
+                    .HasName("PK__HistoryL__D80CB562542E7F4B");
+
+                entity.Property(e => e.Date).HasColumnType("smalldatetime");
+
+                entity.Property(e => e.Field)
+                    .IsRequired()
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.NewFieldValue)
+                    .IsRequired()
+                    .HasMaxLength(4000)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.OldFieldValue)
+                    .IsRequired()
+                    .HasMaxLength(4000)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Table)
+                    .IsRequired()
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UserId).HasColumnName("UserID");
+
+                entity.Property(e => e.Username)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
+
             modelBuilder.Entity<InventoryLog>(entity =>
             {
                 entity.ToTable("Inventory_Log");
@@ -250,35 +271,17 @@ namespace Riva.Models.HAYDEN
                     .IsUnicode(false);
             });
 
-            modelBuilder.Entity<JsonFiles>(entity =>
+            modelBuilder.Entity<JewelryType>(entity =>
             {
-                entity.HasKey(e => e.Idx);
+                entity.Property(e => e.JewelryTypeId).HasColumnName("JewelryTypeID");
 
-                entity.Property(e => e.Idx).HasColumnName("idx");
-
-                entity.Property(e => e.DateEntry).HasColumnType("datetime");
-
-                entity.Property(e => e.Jsontext)
+                entity.Property(e => e.Type)
                     .IsRequired()
-                    .HasMaxLength(4000)
+                    .HasMaxLength(50)
                     .IsUnicode(false);
             });
 
-            modelBuilder.Entity<JsonFilesTests>(entity =>
-            {
-                entity.HasKey(e => e.Idx);
-
-                entity.Property(e => e.Idx).HasColumnName("idx");
-
-                entity.Property(e => e.DateEntry).HasColumnType("datetime");
-
-                entity.Property(e => e.Jsontext)
-                    .IsRequired()
-                    .HasMaxLength(4000)
-                    .IsUnicode(false);
-            });
-
-            modelBuilder.Entity<Logins>(entity =>
+            modelBuilder.Entity<Login>(entity =>
             {
                 entity.HasKey(e => e.UserName);
 
@@ -286,11 +289,11 @@ namespace Riva.Models.HAYDEN
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.DateCreated).HasColumnType("datetime");
+                entity.Property(e => e.DateCreated).HasColumnType("smalldatetime");
 
                 entity.Property(e => e.LastLogin)
                     .HasColumnName("Last_login")
-                    .HasColumnType("datetime");
+                    .HasColumnType("smalldatetime");
 
                 entity.Property(e => e.LoginId)
                     .HasColumnName("LoginID")
@@ -298,34 +301,14 @@ namespace Riva.Models.HAYDEN
 
                 entity.Property(e => e.Password)
                     .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-            });
-
-            modelBuilder.Entity<MapSpidApplicationUser>(entity =>
-            {
-                entity.HasKey(e => e.Spid);
-
-                entity.ToTable("map_spid_application_user");
-
-                entity.Property(e => e.Spid)
-                    .HasColumnName("spid")
-                    .ValueGeneratedNever();
-
-                entity.Property(e => e.LogId)
-                    .HasColumnName("LogID")
-                    .HasMaxLength(128)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.User)
-                    .HasColumnName("user")
-                    .HasMaxLength(128)
-                    .IsUnicode(false);
+                    .HasMaxLength(128);
             });
 
             modelBuilder.Entity<MaterialCodes>(entity =>
             {
-                entity.Property(e => e.Id).HasColumnName("ID");
+                entity.HasKey(e => e.MaterialCodeId);
+
+                entity.Property(e => e.MaterialCodeId).HasColumnName("MaterialCodeID");
 
                 entity.Property(e => e.Code)
                     .IsRequired()
@@ -345,560 +328,432 @@ namespace Riva.Models.HAYDEN
                     .IsUnicode(false);
             });
 
-            modelBuilder.Entity<MetalKarats>(entity =>
+            modelBuilder.Entity<MetalMarket>(entity =>
             {
-                entity.HasKey(e => e.KaratId);
+                entity.Property(e => e.MetalMarketId).HasColumnName("MetalMarketID");
 
-                entity.HasIndex(e => e.StatusId)
-                    .HasName("IX_FK_Karat_Status");
+                entity.Property(e => e.EnteredDate).HasColumnType("datetime");
 
-                entity.Property(e => e.KaratId).HasColumnName("KaratID");
+                entity.Property(e => e.Gold).HasColumnType("money");
 
-                entity.Property(e => e.Description)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
+                entity.Property(e => e.MarketDate).HasColumnType("datetime");
 
-                entity.Property(e => e.StatusId).HasColumnName("StatusID");
+                entity.Property(e => e.Palladium).HasColumnType("money");
 
-                entity.HasOne(d => d.Status)
-                    .WithMany(p => p.MetalKarats)
-                    .HasForeignKey(d => d.StatusId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Karat_Status");
+                entity.Property(e => e.Platinum).HasColumnType("money");
+
+                entity.Property(e => e.Rhodium).HasColumnType("money");
+
+                entity.Property(e => e.Silver).HasColumnType("money");
             });
 
-            modelBuilder.Entity<MetalTypes>(entity =>
+            modelBuilder.Entity<Orders>(entity =>
             {
-                entity.HasKey(e => e.ColorId);
+                entity.Property(e => e.OrdersId).HasColumnName("OrdersID");
 
-                entity.HasIndex(e => e.StatusId)
-                    .HasName("IX_FK_Color_Status");
-
-                entity.Property(e => e.ColorId).HasColumnName("ColorID");
-
-                entity.Property(e => e.Code)
-                    .IsRequired()
-                    .HasMaxLength(20)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Description)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.StatusId).HasColumnName("StatusID");
-
-                entity.HasOne(d => d.Status)
-                    .WithMany(p => p.MetalTypes)
-                    .HasForeignKey(d => d.StatusId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Color_Status");
-            });
-
-            modelBuilder.Entity<OrderDetailsTry>(entity =>
-            {
-                entity.HasKey(e => e.OrderIdx);
-
-                entity.ToTable("OrderDetails_TRY");
-
-                entity.HasIndex(e => e.ColorId)
-                    .HasName("IX_FK_Order_TRY_Color");
-
-                entity.HasIndex(e => e.KaratId)
-                    .HasName("IX_FK_Order_TRY_Karat");
-
-                entity.HasIndex(e => e.OrderStateId)
-                    .HasName("IX_FK_Order_TRY_OrderState");
-
-                entity.HasIndex(e => e.TypeId)
-                    .HasName("IX_FK_Order_TRY_Type");
-
-                entity.Property(e => e.ColorId).HasColumnName("ColorID");
-
-                entity.Property(e => e.ColorId2nd).HasColumnName("ColorID_2nd");
-
-                entity.Property(e => e.Comments)
-                    .HasMaxLength(8000)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.CustomerOrderNo)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Customizeable)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.GemType)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.ItemSku)
-                    .IsRequired()
-                    .HasColumnName("ItemSKU")
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Jeweler)
+                entity.Property(e => e.Comment)
                     .HasMaxLength(200)
                     .IsUnicode(false);
 
-                entity.Property(e => e.KaratId).HasColumnName("KaratID");
+                entity.Property(e => e.CustomerId)
+                    .IsRequired()
+                    .HasColumnName("CustomerID")
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
 
-                entity.Property(e => e.KaratId2nd).HasColumnName("KaratID_2nd");
+                entity.Property(e => e.OrderDate).HasColumnType("datetime");
 
-                entity.Property(e => e.OrderStateId).HasColumnName("OrderStateID");
+                entity.Property(e => e.OrderNoCustomer)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
 
-                entity.Property(e => e.Size).HasColumnType("decimal(5, 2)");
+                entity.Property(e => e.OrderNoInternal)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
 
-                entity.Property(e => e.TypeId).HasColumnName("TypeID");
+                entity.Property(e => e.RequiredDate).HasColumnType("datetime");
 
-                entity.HasOne(d => d.Color)
-                    .WithMany(p => p.OrderDetailsTry)
-                    .HasForeignKey(d => d.ColorId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Order_TRY_Color");
-
-                entity.HasOne(d => d.Karat)
-                    .WithMany(p => p.OrderDetailsTry)
-                    .HasForeignKey(d => d.KaratId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Order_TRY_Karat");
-
-                entity.HasOne(d => d.OrderState)
-                    .WithMany(p => p.OrderDetailsTry)
-                    .HasForeignKey(d => d.OrderStateId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Order_TRY_OrderState");
-
-                entity.HasOne(d => d.Type)
-                    .WithMany(p => p.OrderDetailsTry)
-                    .HasForeignKey(d => d.TypeId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Order_TRY_Type");
+                entity.Property(e => e.ShippedDate).HasColumnType("datetime");
             });
 
-            modelBuilder.Entity<OrderDetailsTrytest>(entity =>
+            modelBuilder.Entity<OrdersDetails>(entity =>
             {
-                entity.HasKey(e => e.OrderIdx);
+                entity.Property(e => e.OrdersDetailsId).HasColumnName("OrdersDetailsID");
 
-                entity.ToTable("OrderDetails_TRYTest");
-
-                entity.HasIndex(e => e.ColorId)
-                    .HasName("IX_FK_Order_TRY_ColorTest");
-
-                entity.HasIndex(e => e.KaratId)
-                    .HasName("IX_FK_Order_TRY_KaratTest");
-
-                entity.HasIndex(e => e.OrderStateId)
-                    .HasName("IX_FK_Order_TRY_OrderStateTest");
-
-                entity.HasIndex(e => e.TypeId)
-                    .HasName("IX_FK_Order_TRY_TypeTest");
-
-                entity.Property(e => e.ColorId).HasColumnName("ColorID");
-
-                entity.Property(e => e.ColorId2nd).HasColumnName("ColorID_2nd");
-
-                entity.Property(e => e.Comments)
-                    .HasMaxLength(8000)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.CustomerOrderNo)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Customizeable)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.GemType)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.ItemSku)
-                    .IsRequired()
-                    .HasColumnName("ItemSKU")
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Jeweler)
+                entity.Property(e => e.Comment)
                     .HasMaxLength(500)
                     .IsUnicode(false);
 
-                entity.Property(e => e.KaratId).HasColumnName("KaratID");
+                entity.Property(e => e.OrdersId).HasColumnName("OrdersID");
 
-                entity.Property(e => e.KaratId2nd).HasColumnName("KaratID_2nd");
+                entity.Property(e => e.ProductsId).HasColumnName("ProductsID");
 
-                entity.Property(e => e.OrderStateId).HasColumnName("OrderStateID");
+                entity.Property(e => e.Qtyrequested).HasColumnName("QTYRequested");
 
-                entity.Property(e => e.Size).HasColumnType("decimal(5, 2)");
+                entity.Property(e => e.Qtyshipped).HasColumnName("QTYShipped");
 
-                entity.Property(e => e.TypeId).HasColumnName("TypeID");
+                entity.Property(e => e.Size).HasColumnType("decimal(10, 3)");
 
-                entity.HasOne(d => d.Color)
-                    .WithMany(p => p.OrderDetailsTrytest)
-                    .HasForeignKey(d => d.ColorId)
+                entity.HasOne(d => d.Orders)
+                    .WithMany(p => p.OrdersDetails)
+                    .HasForeignKey(d => d.OrdersId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Order_TRY_ColorTest");
-
-                entity.HasOne(d => d.Karat)
-                    .WithMany(p => p.OrderDetailsTrytest)
-                    .HasForeignKey(d => d.KaratId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Order_TRY_KaratTest");
-
-                entity.HasOne(d => d.OrderState)
-                    .WithMany(p => p.OrderDetailsTrytest)
-                    .HasForeignKey(d => d.OrderStateId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Order_TRY_OrderStateTest");
-
-                entity.HasOne(d => d.Type)
-                    .WithMany(p => p.OrderDetailsTrytest)
-                    .HasForeignKey(d => d.TypeId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Order_TRY_TypeTest");
+                    .HasConstraintName("FK_OrdersDetails_Orders");
             });
 
-            modelBuilder.Entity<OrderStates>(entity =>
+            modelBuilder.Entity<OrdersDetailsRgw>(entity =>
             {
-                entity.HasKey(e => e.OrderStateId);
+                entity.ToTable("OrdersDetailsRGW");
 
-                entity.Property(e => e.OrderStateId).HasColumnName("OrderStateID");
+                entity.Property(e => e.OrdersDetailsRgwid).HasColumnName("OrdersDetailsRGWID");
 
-                entity.Property(e => e.StateDescription)
-                    .IsRequired()
+                entity.Property(e => e.MoldCode)
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.StatusId).HasColumnName("StatusID");
-            });
+                entity.Property(e => e.OrderDetailsId).HasColumnName("OrderDetailsID");
 
-            modelBuilder.Entity<OrdersTestTry>(entity =>
-            {
-                entity.HasKey(e => e.CustomerOrderNo);
-
-                entity.ToTable("OrdersTest_TRY");
-
-                entity.HasIndex(e => e.CustomerId)
-                    .HasName("IX_FK_Orders_CustomersTest1");
-
-                entity.HasIndex(e => e.OrderStateId)
-                    .HasName("IX_FK_Orders_OrderStateTest1");
-
-                entity.Property(e => e.CustomerOrderNo)
+                entity.Property(e => e.RivaCode)
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.CustomerId)
+                entity.HasOne(d => d.OrderDetails)
+                    .WithMany(p => p.OrdersDetailsRgw)
+                    .HasForeignKey(d => d.OrderDetailsId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_OrdersDetailsRGW_OrdersDetails");
+            });
+
+            modelBuilder.Entity<OrdersStatus>(entity =>
+            {
+                entity.Property(e => e.OrdersStatusId).HasColumnName("OrdersStatusID");
+
+                entity.Property(e => e.Status)
                     .IsRequired()
-                    .HasColumnName("CustomerID")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<Products>(entity =>
+            {
+                entity.Property(e => e.ProductsId).HasColumnName("ProductsID");
+
+                entity.Property(e => e.CommentBox)
+                    .HasMaxLength(4000)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedBy)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.CustomerCode)
                     .HasMaxLength(10)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.CustomerOrderDate).HasColumnType("datetime");
-
-                entity.Property(e => e.CustomerPhoneNo)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.EmailAddress)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.EntryDate).HasColumnType("datetime");
-
-                entity.Property(e => e.OrderId)
-                    .HasColumnName("OrderID")
-                    .ValueGeneratedOnAdd();
-
-                entity.Property(e => e.OrderSource)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.OrderStateId).HasColumnName("OrderStateID");
-
-                entity.Property(e => e.RawPrice).HasColumnType("decimal(10, 2)");
-
-                entity.Property(e => e.RequiredDate).HasColumnType("datetime");
-
-                entity.Property(e => e.ShipAddress1)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.ShipAddress2)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.ShipCompanyName)
-                    .IsRequired()
-                    .HasMaxLength(200)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.ShipCountry)
-                    .HasMaxLength(20)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.ShipPerson)
-                    .IsRequired()
-                    .HasMaxLength(200)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.ShipPostalCode)
-                    .HasMaxLength(20)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.ShipRegion)
-                    .HasMaxLength(20)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.ShipVia)
-                    .HasMaxLength(20)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.ShippedDate).HasColumnType("datetime");
-
-                entity.Property(e => e.TrackingNumber)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.HasOne(d => d.Customer)
-                    .WithMany(p => p.OrdersTestTry)
-                    .HasForeignKey(d => d.CustomerId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Orders_CustomersTest1");
-
-                entity.HasOne(d => d.OrderState)
-                    .WithMany(p => p.OrdersTestTry)
-                    .HasForeignKey(d => d.OrderStateId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Orders_OrderStateTest1");
-            });
-
-            modelBuilder.Entity<OrdersTry>(entity =>
-            {
-                entity.HasKey(e => e.CustomerOrderNo);
-
-                entity.ToTable("Orders_TRY");
-
-                entity.HasIndex(e => e.CustomerId)
-                    .HasName("IX_FK_Orders_Customers1");
-
-                entity.HasIndex(e => e.OrderStateId)
-                    .HasName("IX_FK_Orders_OrderState1");
-
-                entity.Property(e => e.CustomerOrderNo)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.CustomerId)
-                    .IsRequired()
-                    .HasColumnName("CustomerID")
-                    .HasMaxLength(10)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.CustomerOrderDate).HasColumnType("datetime");
-
-                entity.Property(e => e.CustomerPhoneNo)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.EmailAddress)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.EntryDate).HasColumnType("datetime");
-
-                entity.Property(e => e.OrderId)
-                    .HasColumnName("OrderID")
-                    .ValueGeneratedOnAdd();
-
-                entity.Property(e => e.OrderSource)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.OrderStateId).HasColumnName("OrderStateID");
-
-                entity.Property(e => e.RawPrice).HasColumnType("decimal(10, 2)");
-
-                entity.Property(e => e.RequiredDate).HasColumnType("datetime");
-
-                entity.Property(e => e.ShipAddress1)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.ShipAddress2)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.ShipCompanyName)
-                    .IsRequired()
-                    .HasMaxLength(200)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.ShipCountry)
-                    .HasMaxLength(20)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.ShipPerson)
-                    .IsRequired()
-                    .HasMaxLength(200)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.ShipPostalCode)
-                    .HasMaxLength(20)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.ShipRegion)
-                    .HasMaxLength(20)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.ShipVia)
-                    .HasMaxLength(20)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.ShippedDate).HasColumnType("datetime");
-
-                entity.Property(e => e.TrackingNumber)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.HasOne(d => d.Customer)
-                    .WithMany(p => p.OrdersTry)
-                    .HasForeignKey(d => d.CustomerId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Orders_Customers1");
-
-                entity.HasOne(d => d.OrderState)
-                    .WithMany(p => p.OrdersTry)
-                    .HasForeignKey(d => d.OrderStateId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Orders_OrderState1");
-            });
-
-            modelBuilder.Entity<ProductBomTry>(entity =>
-            {
-                entity.HasKey(e => e.BomIdx);
-
-                entity.ToTable("ProductBOM_TRY");
-
-                entity.Property(e => e.ComponentName)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.ProductSku)
-                    .IsRequired()
-                    .HasColumnName("ProductSKU")
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-            });
-
-            modelBuilder.Entity<ProductTypes>(entity =>
-            {
-                entity.HasKey(e => e.ProductTypeId);
-
-                entity.Property(e => e.ProductTypeId).HasColumnName("ProductTypeID");
-
-                entity.Property(e => e.Description)
-                    .IsRequired()
-                    .HasMaxLength(200)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.StatusId).HasColumnName("StatusID");
-            });
-
-            modelBuilder.Entity<ProductsTry>(entity =>
-            {
-                entity.HasKey(e => e.ProductId);
-
-                entity.ToTable("Products_TRY");
-
-                entity.HasIndex(e => e.StatusId)
-                    .HasName("IX_FK_Products_TRY_Status");
-
-                entity.Property(e => e.ProductId).HasColumnName("ProductID");
-
-                entity.Property(e => e.CommentsPd)
-                    .HasColumnName("CommentsPD")
-                    .HasMaxLength(200)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.CommentsRouting)
-                    .HasMaxLength(200)
-                    .IsUnicode(false);
+                    .IsUnicode(false)
+                    .HasDefaultValueSql("('RIVA')");
 
                 entity.Property(e => e.CustomerSku)
-                    .IsRequired()
                     .HasColumnName("CustomerSKU")
-                    .HasMaxLength(50)
+                    .HasMaxLength(100)
                     .IsUnicode(false);
 
-                entity.Property(e => e.DateCreated).HasColumnType("datetime");
+                entity.Property(e => e.FirstProductionDate).HasColumnType("datetime");
 
-                entity.Property(e => e.DateEditted).HasColumnType("datetime");
-
-                entity.Property(e => e.InternalSku)
-                    .HasColumnName("InternalSKU")
-                    .HasMaxLength(50)
+                entity.Property(e => e.PicPath)
+                    .HasMaxLength(100)
                     .IsUnicode(false);
 
-                entity.Property(e => e.PicturePath)
-                    .HasMaxLength(200)
+                entity.Property(e => e.ProductDesc)
+                    .HasMaxLength(500)
                     .IsUnicode(false);
 
                 entity.Property(e => e.ProductName)
                     .IsRequired()
-                    .HasMaxLength(200)
+                    .HasMaxLength(100)
                     .IsUnicode(false);
 
-                entity.Property(e => e.ProductTypeId).HasColumnName("ProductTypeID");
-
-                entity.Property(e => e.Size)
-                    .HasMaxLength(50)
+                entity.Property(e => e.Sku)
+                    .HasColumnName("SKU")
+                    .HasMaxLength(100)
                     .IsUnicode(false);
 
-                entity.Property(e => e.StatusId).HasColumnName("StatusID");
+                entity.Property(e => e.Status).HasDefaultValueSql("((1))");
+            });
 
-                entity.Property(e => e.UnitPrice).HasColumnType("decimal(10, 2)");
+            modelBuilder.Entity<ProductsBom>(entity =>
+            {
+                entity.ToTable("ProductsBOM");
 
-                entity.Property(e => e.UpdatedBy)
-                    .HasMaxLength(50)
+                entity.Property(e => e.ProductsBomid).HasColumnName("ProductsBOMID");
+
+                entity.Property(e => e.Description)
+                    .HasMaxLength(100)
                     .IsUnicode(false);
 
-                entity.HasOne(d => d.Status)
-                    .WithMany(p => p.ProductsTry)
-                    .HasForeignKey(d => d.StatusId)
+                entity.Property(e => e.ProductsId).HasColumnName("ProductsID");
+
+                entity.Property(e => e.Qty)
+                    .HasColumnName("QTY")
+                    .HasColumnType("decimal(6, 2)");
+
+                entity.HasOne(d => d.Products)
+                    .WithMany(p => p.ProductsBom)
+                    .HasForeignKey(d => d.ProductsId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Products_TRY_Status");
+                    .HasConstraintName("FK_ProductsBOM_Products");
             });
 
-            modelBuilder.Entity<Status>(entity =>
+            modelBuilder.Entity<ProductsPrices>(entity =>
             {
+                entity.HasKey(e => e.ProductsWhslid)
+                    .HasName("PK_ProductsPriceWHSL");
+
+                entity.Property(e => e.ProductsWhslid).HasColumnName("ProductsWHSLID");
+
+                entity.Property(e => e.Price).HasColumnType("money");
+
+                entity.Property(e => e.ProductsId).HasColumnName("ProductsID");
+
+                entity.Property(e => e.Size).HasColumnType("decimal(3, 2)");
+
+                entity.HasOne(d => d.Products)
+                    .WithMany(p => p.ProductsPrices)
+                    .HasForeignKey(d => d.ProductsId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_ProductsPrices_Products");
+            });
+
+            modelBuilder.Entity<ProductsStatus>(entity =>
+            {
+                entity.HasKey(e => e.StatusId)
+                    .HasName("PK_ProductStatus");
+
                 entity.Property(e => e.StatusId).HasColumnName("StatusID");
 
-                entity.Property(e => e.Description)
-                    .IsRequired()
-                    .HasMaxLength(200)
-                    .IsUnicode(false);
-            });
-
-            modelBuilder.Entity<Types>(entity =>
-            {
-                entity.HasKey(e => e.TypeId);
-
-                entity.Property(e => e.TypeId).HasColumnName("TypeID");
-
-                entity.Property(e => e.Description)
+                entity.Property(e => e.Status)
                     .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
+            });
 
-                entity.Property(e => e.StatusId).HasColumnName("StatusID");
+            modelBuilder.Entity<ProductsStock>(entity =>
+            {
+                entity.Property(e => e.ProductsStockId).HasColumnName("ProductsStockID");
+
+                entity.Property(e => e.ProductsId).HasColumnName("ProductsID");
+
+                entity.Property(e => e.Qty)
+                    .HasColumnName("QTY")
+                    .HasColumnType("decimal(10, 3)");
+
+                entity.Property(e => e.Size).HasColumnType("decimal(5, 3)");
+
+                entity.Property(e => e.Uom).HasColumnName("UOM");
+
+                entity.HasOne(d => d.Products)
+                    .WithMany(p => p.ProductsStock)
+                    .HasForeignKey(d => d.ProductsId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_ProductsQTY_Products");
+            });
+
+            modelBuilder.Entity<ProductsWtg>(entity =>
+            {
+                entity.ToTable("ProductsWTG");
+
+                entity.Property(e => e.ProductsWtgid)
+                    .HasColumnName("ProductsWTGID")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.ProductsId).HasColumnName("ProductsID");
+
+                entity.Property(e => e.Wtg)
+                    .HasColumnName("WTG")
+                    .HasColumnType("decimal(6, 3)");
+
+                entity.HasOne(d => d.Products)
+                    .WithMany(p => p.ProductsWtg)
+                    .HasForeignKey(d => d.ProductsId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_ProductsWTG_Products");
+            });
+
+            modelBuilder.Entity<UnitsOfMeasure>(entity =>
+            {
+                entity.Property(e => e.UnitsOfMeasureId).HasColumnName("UnitsOfMeasureID");
+
+                entity.Property(e => e.Uom)
+                    .IsRequired()
+                    .HasColumnName("UOM")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<VwJsonFiles>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("vw_JsonFiles");
+
+                entity.Property(e => e.CustomerOrderNo)
+                    .HasMaxLength(9)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DateEntry).HasColumnType("smalldatetime");
+
+                entity.Property(e => e.Idx)
+                    .HasColumnName("idx")
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.Jsontext)
+                    .IsRequired()
+                    .HasMaxLength(4000)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Name)
+                    .HasColumnName("name")
+                    .HasMaxLength(4000)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Sku)
+                    .HasColumnName("sku")
+                    .HasMaxLength(9)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<ZAspNetRoles>(entity =>
+            {
+                entity.ToTable("zAspNetRoles");
+
+                entity.HasIndex(e => e.Name)
+                    .HasName("RoleNameIndex")
+                    .IsUnique();
+
+                entity.Property(e => e.Id).HasMaxLength(128);
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(256);
+            });
+
+            modelBuilder.Entity<ZAspNetUserClaims>(entity =>
+            {
+                entity.ToTable("zAspNetUserClaims");
+
+                entity.HasIndex(e => e.UserId)
+                    .HasName("IX_UserId");
+
+                entity.Property(e => e.UserId)
+                    .IsRequired()
+                    .HasMaxLength(128);
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.ZAspNetUserClaims)
+                    .HasForeignKey(d => d.UserId)
+                    .HasConstraintName("FK_dbo.AspNetUserClaims_dbo.AspNetUsers_UserId");
+            });
+
+            modelBuilder.Entity<ZAspNetUserLogins>(entity =>
+            {
+                entity.HasKey(e => new { e.LoginProvider, e.ProviderKey, e.UserId })
+                    .HasName("PK_dbo.AspNetUserLogins");
+
+                entity.ToTable("zAspNetUserLogins");
+
+                entity.HasIndex(e => e.UserId)
+                    .HasName("IX_UserId");
+
+                entity.Property(e => e.LoginProvider).HasMaxLength(128);
+
+                entity.Property(e => e.ProviderKey).HasMaxLength(128);
+
+                entity.Property(e => e.UserId).HasMaxLength(128);
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.ZAspNetUserLogins)
+                    .HasForeignKey(d => d.UserId)
+                    .HasConstraintName("FK_dbo.AspNetUserLogins_dbo.AspNetUsers_UserId");
+            });
+
+            modelBuilder.Entity<ZAspNetUserRoles>(entity =>
+            {
+                entity.HasKey(e => new { e.UserId, e.RoleId })
+                    .HasName("PK_dbo.AspNetUserRoles");
+
+                entity.ToTable("zAspNetUserRoles");
+
+                entity.HasIndex(e => e.RoleId)
+                    .HasName("IX_RoleId");
+
+                entity.HasIndex(e => e.UserId)
+                    .HasName("IX_UserId");
+
+                entity.Property(e => e.UserId).HasMaxLength(128);
+
+                entity.Property(e => e.RoleId).HasMaxLength(128);
+
+                entity.HasOne(d => d.Role)
+                    .WithMany(p => p.ZAspNetUserRoles)
+                    .HasForeignKey(d => d.RoleId)
+                    .HasConstraintName("FK_dbo.AspNetUserRoles_dbo.AspNetRoles_RoleId");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.ZAspNetUserRoles)
+                    .HasForeignKey(d => d.UserId)
+                    .HasConstraintName("FK_dbo.AspNetUserRoles_dbo.AspNetUsers_UserId");
+            });
+
+            modelBuilder.Entity<ZAspNetUsers>(entity =>
+            {
+                entity.ToTable("zAspNetUsers");
+
+                entity.HasIndex(e => e.UserName)
+                    .HasName("UserNameIndex")
+                    .IsUnique();
+
+                entity.Property(e => e.Id).HasMaxLength(128);
+
+                entity.Property(e => e.Email).HasMaxLength(256);
+
+                entity.Property(e => e.FirstName)
+                    .IsRequired()
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.JoinDate).HasColumnType("datetime");
+
+                entity.Property(e => e.LastName)
+                    .IsRequired()
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.LockoutEndDateUtc).HasColumnType("datetime");
+
+                entity.Property(e => e.UserName)
+                    .IsRequired()
+                    .HasMaxLength(256);
+            });
+
+            modelBuilder.Entity<ZmapSpidApplicationUser>(entity =>
+            {
+                entity.HasKey(e => e.Spid)
+                    .HasName("PK__map_spid__2DD52ACC019AD4A5");
+
+                entity.ToTable("zmap_spid_application_user");
+
+                entity.Property(e => e.Spid)
+                    .HasColumnName("spid")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.LogId)
+                    .HasColumnName("LogID")
+                    .HasMaxLength(128)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.User)
+                    .HasColumnName("user")
+                    .HasMaxLength(128)
+                    .IsUnicode(false);
             });
 
             OnModelCreatingPartial(modelBuilder);

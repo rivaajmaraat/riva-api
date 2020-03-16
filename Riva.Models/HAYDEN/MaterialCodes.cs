@@ -5,7 +5,7 @@ namespace Riva.Models.HAYDEN
 {
     public partial class MaterialCodes
     {
-        public int Id { get; set; }
+        public int MaterialCodeId { get; set; }
         public string Code { get; set; }
         public string Karat { get; set; }
         public string Color { get; set; }

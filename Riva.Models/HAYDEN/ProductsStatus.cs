@@ -3,10 +3,9 @@ using System.Collections.Generic;
 
 namespace Riva.Models.HAYDEN
 {
-    public partial class ProductTypes
+    public partial class ProductsStatus
     {
-        public int ProductTypeId { get; set; }
-        public string Description { get; set; }
         public int StatusId { get; set; }
+        public string Status { get; set; }
     }
 }

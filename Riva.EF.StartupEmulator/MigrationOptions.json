@@ -1,0 +1,8 @@
+﻿{
+  "ConnectionStrings": {
+    "HAYDEN": "Server=localhost\\SQLEXPRESS;Database=HAYDEN;User Id=sa;Password=pass123456;Trusted_Connection=True;",
+    "RivaData": "Server=localhost\\SQLEXPRESS;Database=RivaData;User Id=sa;Password=pass123456;Trusted_Connection=True;",
+    "RivaSQL": "Server=localhost\\SQLEXPRESS;Database=RivaSQL;User Id=sa;Password=pass123456;Trusted_Connection=True;",
+    "WaxModel": "Server=localhost\\SQLEXPRESS;Database=WaxModel;User Id=sa;Password=pass123456;Trusted_Connection=True;"
+  }
+}

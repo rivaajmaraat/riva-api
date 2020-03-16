@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace Riva.Models.HAYDEN
 {
-    public partial class Logins
+    public partial class Login
     {
         public int LoginId { get; set; }
         public string UserName { get; set; }
-        public string Password { get; set; }
+        public byte[] Password { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime LastLogin { get; set; }
         public int Status { get; set; }
