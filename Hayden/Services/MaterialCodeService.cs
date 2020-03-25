@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Hayden.BLL
+namespace Hayden.Services
 {
-    public class BLLmaterialcodes
+    public class MaterialCodeService
     {
 
         #region Constructor
-        public BLLmaterialcodes()
+        public MaterialCodeService()
         {
 
         }

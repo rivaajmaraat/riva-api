@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Hayden.BLL;
+using Hayden.Services;
 using Hayden.Models;
 
 namespace RivaAPI.Controllers
@@ -17,7 +17,7 @@ namespace RivaAPI.Controllers
         [HttpGet]
         public IEnumerable<Login> Get()
         {
-            var login = BLLlogin.GetAll(null);
+            var login = LoginService.GetAll(null);
 
             // return new string[] { "value1", "value2" };
             return (login);

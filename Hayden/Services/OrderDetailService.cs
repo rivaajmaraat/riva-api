@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Hayden.BLL
+namespace Hayden.Services
 {
-    public class BLLordersdetails
+    public class OrderDetailService
     {
         #region Constructor
-        public BLLordersdetails()
+        public OrderDetailService()
         {
 
         }

@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using Hayden.Models;
 
-namespace Hayden.BLL
+namespace Hayden.Services
 {
-    public class BLLcustomers
+    public class CustomerService
     {
         #region Constructor
-        public BLLcustomers()
+        public CustomerService()
         {
 
         }

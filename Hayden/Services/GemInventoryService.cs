@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using Hayden.Models;
 
-namespace Hayden.BLL
+namespace Hayden.Services
 {
-    public class BLLgeminventory
+    public class GemInventoryService
     {
         #region Constructor
-        public BLLgeminventory()
+        public GemInventoryService()
         {
 
         }
