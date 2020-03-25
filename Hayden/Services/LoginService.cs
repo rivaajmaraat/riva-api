@@ -71,6 +71,7 @@ namespace Hayden.Services
                 }
             }
         }
+
         /// <summary>
         /// Gets the list of existing login details with encrypted passwords
         /// </summary>
@@ -92,7 +93,43 @@ namespace Hayden.Services
             }
         }
 
-        public async Task<Response> UpdateLoginDetails(LoginRequest login)
+        /// <summary>
+        /// Creates new login data.
+        /// </summary>
+        /// <param name="data">Login data</param>
+        /// <returns><see cref="ResponseMessage"/></returns>
+        public static async Task<Response> CreateUser(LoginRequest data)
+        {
+            using (HAYDENContext context = new HAYDENContext())
+            {
+                using var transaction = context.Database.BeginTransaction();
+                try
+                {
+                    var existLogin = await context.Login.FirstOrDefaultAsync(l => l.UserName == data.UserName);
+                    if (existLogin != null)
+                        return Response.Error("Login already exists.");
+                    object[] sprocParams = {
+                    new SqlParameter("@UserName", data.UserName),
+                    new SqlParameter("@Password", data.Password),
+                    new SqlParameter("@DateCreated", DateTime.UtcNow),
+                    new SqlParameter("@LastLogin", DateTime.UtcNow),
+                    new SqlParameter("@status", 1)
+                };
+                    await context.Database.ExecuteSqlRawAsync(
+                        "EXEC [spInsertLogin] @UserName, @Password, @DateCreated, @LastLogin, @status",
+                        parameters: sprocParams);
+                    await transaction.CommitAsync();
+                    return Response.Success();
+                }
+                catch (Exception ex)
+                {
+                    await transaction.RollbackAsync();
+                    return Response.Error(ex);
+                }
+            }
+        }
+
+        public static async Task<Response> UpdateLoginDetails(LoginRequest login)
         {
             using (HAYDENContext context = new HAYDENContext())
             {
@@ -135,7 +172,7 @@ namespace Hayden.Services
             }
         }
 
-        public async Task<Response> DeleteLogin(int id)
+        public static async Task<Response> DeleteLogin(int id)
         {
             using (HAYDENContext context = new HAYDENContext())
             {
@@ -161,58 +198,6 @@ namespace Hayden.Services
                 }
             }
         }
-
-        public static IQueryable<Login> Get(HAYDENContext context, int loginID)
-        {
-            if (context == null) context = new HAYDENContext();
-
-            var item = (from i in context.Login
-                        select i);
-
-            if (loginID > 0)
-            {
-                item = item.Where(i => i.LoginId == loginID);
-            }
-
-            return item;
-        }
-
-
-        public static List<Login> GetAll(HAYDENContext context)
-        {
-            return Get(context, 0).ToList();
-        }
-
-        public static Login GetById(HAYDENContext context, int loginID)
-        {
-            return Get(context, loginID).FirstOrDefault();
-        }
-
-        
-
         #endregion
-
-        #region Helpers
-
-        // TODO : Apply SP calls
-        //public static Login GetLogin(string username, string password)
-        //{
-        //    var context = new HAYDENContext();
-
-        //    var param = new SqlParameter("@FirstName", "Bill");
-        //    //or
-        //    /*var param = new SqlParameter() {
-        //                        ParameterName = "@FirstName",
-        //                        SqlDbType =  System.Data.SqlDbType.VarChar,
-        //                        Direction = System.Data.ParameterDirection.Input,
-        //                        Size = 50,
-        //                        Value = "Bill"
-        //    };*/
-
-        //    var students = context.Login.FromSql("GetStudents @FirstName", param).ToList();
-        //}
-
-        #endregion
-
     }
 }

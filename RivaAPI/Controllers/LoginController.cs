@@ -15,40 +15,75 @@ namespace RivaAPI.Controllers
     [ApiController]
     public class LoginController : ControllerBase
     {
-        // GET: api/Login
-        [HttpGet]
-        public IEnumerable<Login> Get()
-        {
-            var login = LoginService.GetAll(null);
-
-            // return new string[] { "value1", "value2" };
-            return (login);
-        }
-
-        // GET: api/Login/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // PUT: api/Login/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
-
         // POST: api/Login
         [HttpPost]
         public async Task<IActionResult> Login([FromBody] LoginRequest login)
         {
             var response = await LoginService.Login(login);
+
+            switch (response.State)
+            {
+                case ResponseState.Exception:
+                    return StatusCode(500, response.Exception.Message);
+                case ResponseState.Error:
+                    return BadRequest(response.MessageText);
+                default:
+                    return Ok(response);
+            }
+        }
+
+        [HttpGet("list")]
+        public async Task<IActionResult> List()
+        {
+            var response = await LoginService.LoginList();
+
+            switch (response.State)
+            {
+                case ResponseState.Exception:
+                    return StatusCode(500, response.Exception.Message);
+                case ResponseState.Error:
+                    return BadRequest(response.MessageText);
+                default:
+                    return Ok(response);
+            }
+        }
+
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody]LoginRequest login)
+        {
+            var response = await LoginService.CreateUser(login);
+
+            switch (response.State)
+            {
+                case ResponseState.Exception:
+                    return StatusCode(500, response.Exception.Message);
+                case ResponseState.Error:
+                    return BadRequest(response.MessageText);
+                default:
+                    return Ok(response);
+            }
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateLoginDetails([FromBody]LoginRequest login)
+        {
+            var response = await LoginService.UpdateLoginDetails(login);
+
+            switch (response.State)
+            {
+                case ResponseState.Exception:
+                    return StatusCode(500, response.Exception.Message);
+                case ResponseState.Error:
+                    return BadRequest(response.MessageText);
+                default:
+                    return Ok(response);
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteLogin(int id)
+        {
+            var response = await LoginService.DeleteLogin(id);
 
             switch (response.State)
             {

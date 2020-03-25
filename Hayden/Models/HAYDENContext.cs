@@ -16,6 +16,7 @@ namespace Hayden.Models
         }
 
         public virtual DbSet<Customers> Customers { get; set; }
+        public virtual DbSet<Departments> Departments { get; set; }
         public virtual DbSet<GemInventory> GemInventory { get; set; }
         public virtual DbSet<GemStatus> GemStatus { get; set; }
         public virtual DbSet<HistoryLogs> HistoryLogs { get; set; }
@@ -47,9 +48,7 @@ namespace Hayden.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                // TODO : Used an external file to make db flexible
-                // #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                //optionsBuilder.UseSqlServer("Data Source=38.96.171.215;Initial Catalog=HAYDEN;Persist Security Info=True;User ID=riva-users;Password=sqldbR1v@2019;");
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseSqlServer("Server=localhost\\SQLEXPRESS;Database=HAYDEN;User Id=sa;Password=pass123456;Trusted_Connection=True;");
             }
         }
@@ -119,6 +118,19 @@ namespace Hayden.Models
                 entity.Property(e => e.ShippingMethod)
                     .HasMaxLength(20)
                     .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<Departments>(entity =>
+            {
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(256);
+
+                entity.Property(e => e.Role)
+                    .IsRequired()
+                    .HasMaxLength(128);
             });
 
             modelBuilder.Entity<GemInventory>(entity =>
@@ -288,11 +300,7 @@ namespace Hayden.Models
 
             modelBuilder.Entity<Login>(entity =>
             {
-                entity.HasKey(e => e.UserName);
-
-                entity.Property(e => e.UserName)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
+                entity.Property(e => e.LoginId).HasColumnName("LoginID");
 
                 entity.Property(e => e.DateCreated).HasColumnType("smalldatetime");
 
@@ -300,13 +308,13 @@ namespace Hayden.Models
                     .HasColumnName("Last_login")
                     .HasColumnType("smalldatetime");
 
-                entity.Property(e => e.LoginId)
-                    .HasColumnName("LoginID")
-                    .ValueGeneratedOnAdd();
-
                 entity.Property(e => e.Password)
                     .IsRequired()
                     .HasMaxLength(128);
+
+                entity.Property(e => e.UserName)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<MaterialCodes>(entity =>
